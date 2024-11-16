@@ -1,0 +1,35 @@
+spring.application.name: spring-boot-quartz-sample
+server:
+  port: 8080
+
+spring:
+  mvc:
+    servlet:
+      path: /api
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    #    jdbc-url: jdbc:mysql://127.0.0.1:13306/blog?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    jdbc-url: jdbc:mysql://localhost:13306/blog?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    username: yuji
+    password: 53cret
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+      schema: classpath:quartz/quartz.sql
+      platform: mysql
+    scheduler-name: quartzScheduler
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: thenchanthavithou@gmail.com
+    password: zmtfurddgbvqamnb
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
