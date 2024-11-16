@@ -19,6 +19,7 @@ bin/
 ### IntelliJ IDEA ###
 .idea
 logs
+my-db
 *.iws
 *.iml
 *.ipr
