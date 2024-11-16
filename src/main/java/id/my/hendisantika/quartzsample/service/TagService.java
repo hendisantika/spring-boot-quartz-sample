@@ -1,5 +1,6 @@
 package id.my.hendisantika.quartzsample.service;
 
+import id.my.hendisantika.quartzsample.exception.BadRequestException;
 import id.my.hendisantika.quartzsample.exception.DataNotFoundException;
 import id.my.hendisantika.quartzsample.model.entity.Tag;
 import id.my.hendisantika.quartzsample.repository.TagRepository;
@@ -54,4 +55,12 @@ public class TagService {
         }
     }
 
+    public void deleteById(Long id) {
+        Optional<Tag> tag = tagRepository.findById(id);
+        if (tag.isPresent()) {
+            tagRepository.deleteById(id);
+        } else {
+            throw new BadRequestException("Delete error, please check ID and try again");
+        }
+    }
 }
