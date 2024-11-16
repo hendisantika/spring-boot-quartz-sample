@@ -33,3 +33,9 @@ spring:
           auth: true
           starttls:
             enable: true
+springdoc:
+  version: 1.0.0
+  swagger-ui:
+    path: /swagger-ui
+  api-docs:
+    path: /v3/api-doc

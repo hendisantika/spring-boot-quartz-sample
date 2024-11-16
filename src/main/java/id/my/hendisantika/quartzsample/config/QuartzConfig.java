@@ -1,5 +1,6 @@
 package id.my.hendisantika.quartzsample.config;
 
+import de.chandre.quartz.spring.AutowiringSpringBeanJobFactory;
 import lombok.RequiredArgsConstructor;
 import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
