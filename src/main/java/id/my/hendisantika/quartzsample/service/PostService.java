@@ -1,5 +1,6 @@
 package id.my.hendisantika.quartzsample.service;
 
+import id.my.hendisantika.quartzsample.exception.BadRequestException;
 import id.my.hendisantika.quartzsample.exception.DataNotFoundException;
 import id.my.hendisantika.quartzsample.model.dto.PostDTO;
 import id.my.hendisantika.quartzsample.model.entity.Author;
@@ -116,5 +117,15 @@ public class PostService {
                         () ->
                                 new DataNotFoundException(
                                         MessageFormat.format("Post id {0} not found", String.valueOf(postId))));
+    }
+
+    public void deleteTagFromPost(Long postId, Long tagId) {
+        Optional<Post> post = postRepository.findById(postId);
+        if (post.isPresent()) {
+            post.get().removeTag(tagId);
+            postRepository.save(post.get());
+        } else {
+            throw new BadRequestException("Delete error, please check ID and try again");
+        }
     }
 }
