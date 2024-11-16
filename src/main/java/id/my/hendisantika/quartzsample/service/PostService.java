@@ -4,6 +4,7 @@ import id.my.hendisantika.quartzsample.exception.DataNotFoundException;
 import id.my.hendisantika.quartzsample.model.dto.PostDTO;
 import id.my.hendisantika.quartzsample.model.entity.Author;
 import id.my.hendisantika.quartzsample.model.entity.Post;
+import id.my.hendisantika.quartzsample.model.entity.Tag;
 import id.my.hendisantika.quartzsample.repository.AuthorRepository;
 import id.my.hendisantika.quartzsample.repository.PostRepository;
 import id.my.hendisantika.quartzsample.repository.TagRepository;
@@ -77,6 +78,16 @@ public class PostService {
         } else {
             return postRepository.save(modelMapper.map(postRequest, Post.class));
         }
+    }
+
+    public List<Tag> getAllTagsByPostId(Long id) {
+        if (!postRepository.existsById(id)) {
+            throw new DataNotFoundException(
+                    MessageFormat.format("Post id {0} not found", String.valueOf(id)));
+        }
+
+        List<Tag> tagList = postRepository.findById(id).get().getTagList();
+        return tagList;
     }
 
 }
