@@ -59,14 +59,14 @@ public class JobScheduler {
             //                            .usingJobData("subject", jobDTO.getSubject())
             //                            .usingJobData("body", jobDTO.getBody())
             //                            .build();
-
+            long timeAdj = 24 * 60 * 60 * 1000;
             Trigger trigger =
                     newTrigger()
                             .forJob(job)
                             .withIdentity(uuid, "GROUP1")
                             .startAt(new Date())
                             .withSchedule(calendarIntervalSchedule().withIntervalInMinutes(1))
-                            .endAt(new Date("2023/12/31"))
+                            .endAt(new Date(System.currentTimeMillis() + timeAdj))
                             .build();
 
             scheduler.scheduleJob(job, trigger);

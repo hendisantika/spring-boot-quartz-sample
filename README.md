@@ -8,6 +8,10 @@
 4. Open your favorite browser
 5. Open Swagger UI: http://localhost:8080/api/
 
+Swagger UI
+
+![Swagger UI](img/Swagger-UI.png "Swagger UI")
+
 ### MySQL
 
     https://hub.docker.com/_/mysql

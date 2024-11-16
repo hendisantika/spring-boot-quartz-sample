@@ -23,7 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class SwaggerConfig implements WebMvcConfigurer {
 
-    private static final String REDIRECT_URL = "/swagger-ui.html";
+    private static final String REDIRECT_URL = "/swagger-ui";
 
     @Value("${spring.mvc.servlet.path}")
     private String baseUrl;
