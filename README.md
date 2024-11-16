@@ -5,10 +5,8 @@
 1. Clone this repository: `git clone https://github.com/hendisantika/spring-boot-quartz-sample.git`
 2. Navigate to the folder: `cd spring-boot-quartz-sample`
 3. Run the application: `mvn clean spring-boot:run`
-
-### Swagger UI
-
-    http://localhost:8080/api/
+4. Open your favorite browser
+5. Open Swagger UI: http://localhost:8080/api/
 
 ### MySQL
 
