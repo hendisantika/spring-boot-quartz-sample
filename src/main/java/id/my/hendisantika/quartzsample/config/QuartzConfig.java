@@ -4,13 +4,20 @@ import lombok.RequiredArgsConstructor;
 import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.boot.autoconfigure.quartz.QuartzDataSource;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
+import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,5 +55,21 @@ public class QuartzConfig {
         scheduler.setAutoStartup(true);
 
         return scheduler;
+    }
+
+    @Bean
+    @Primary
+    @QuartzDataSource
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource quartzDataSource() {
+        return DataSourceBuilder.create().build();
+    }
+
+    public Properties quartzProperties() throws IOException {
+
+        PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
+        propertiesFactoryBean.setLocation(new ClassPathResource(QUARTZ_PROPERTIES));
+        propertiesFactoryBean.afterPropertiesSet();
+        return propertiesFactoryBean.getObject();
     }
 }
