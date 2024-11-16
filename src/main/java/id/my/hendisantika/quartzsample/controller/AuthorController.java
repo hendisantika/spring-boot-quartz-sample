@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -40,4 +42,11 @@ public class AuthorController {
         Author entity = service.getById(id);
         return new ResponseEntity<>(entity, HttpStatus.OK);
     }
+
+    @PostMapping("/v1/authors")
+    public ResponseEntity<Author> createOrUpdate(@RequestBody Author Author) {
+        Author updated = service.createOrUpdate(Author);
+        return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
+
 }
