@@ -19,6 +19,10 @@ configurations {
     }
 }
 
+ext {
+    appDescription = 'Scheduler API Service.'
+}
+
 repositories {
     mavenCentral()
 }
@@ -46,4 +50,11 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+task printInfo {
+    doLast {
+        println "Application Version: ${version}"
+        println "Application Description: ${appDescription}"
+    }
 }

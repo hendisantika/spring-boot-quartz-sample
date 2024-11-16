@@ -39,3 +39,5 @@ springdoc:
     path: /swagger-ui
   api-docs:
     path: /v3/api-doc
+application-description: '@project.description@'
+application-version: '@project.version@'

@@ -11,7 +11,7 @@ package id.my.hendisantika.quartzsample.exception;
  * To change this template use File | Settings | File Templates.
  */
 
-import org.hibernate.service.spi.ServiceException;
+import id.my.hendisantika.quartzsample.exception.base.ServiceException;
 
 /**
  * trigger for bad request exception
