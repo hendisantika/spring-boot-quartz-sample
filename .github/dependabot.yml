@@ -1,13 +1,84 @@
+# Dependabot configuration
+# Docs: https://docs.github.com/code-security/dependabot/working-with-dependabot/dependabot-options-reference
 version: 2
+
 updates:
+  # Gradle dependencies (build.gradle) & Gradle wrapper
   - package-ecosystem: gradle
     directory: "/"
     schedule:
       interval: daily
-      time: '05:00'
+      time: "05:00"
       timezone: Asia/Jakarta
     open-pull-requests-limit: 10
-  - package-ecosystem: "github-actions"
+    target-branch: main
+    labels:
+      - "dependencies"
+      - "java"
+    commit-message:
+      prefix: "chore(deps)"
+      include: scope
+    groups:
+      spring-boot:
+        patterns:
+          - "org.springframework.boot*"
+          - "io.spring.dependency-management*"
+        update-types:
+          - "minor"
+          - "patch"
+      testcontainers:
+        patterns:
+          - "org.testcontainers*"
+      test-libraries:
+        patterns:
+          - "io.rest-assured*"
+          - "org.seleniumhq.selenium*"
+          - "org.junit*"
+      gradle-minor-patch:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "org.springframework.boot*"
+          - "io.spring.dependency-management*"
+          - "org.testcontainers*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # GitHub Actions used in .github/workflows
+  - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: weekly
+      day: monday
+      time: "05:00"
+      timezone: Asia/Jakarta
+    open-pull-requests-limit: 5
+    target-branch: main
+    labels:
+      - "dependencies"
+      - "github_actions"
+    commit-message:
+      prefix: "ci(deps)"
+      include: scope
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  # Docker images referenced in compose.yaml
+  - package-ecosystem: docker-compose
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "05:00"
+      timezone: Asia/Jakarta
+    open-pull-requests-limit: 5
+    target-branch: main
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(docker)"
+      include: scope
