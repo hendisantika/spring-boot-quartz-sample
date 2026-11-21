@@ -25,8 +25,6 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: read
-    env:
-      TC_CLOUD_TOKEN: ${{ secrets.TC_CLOUD_TOKEN }}
 
     steps:
     - uses: actions/checkout@v7
@@ -42,14 +40,7 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
 
-    # Testcontainers Cloud is optional: secrets are not available on Dependabot/fork PRs,
-    # in that case the tests use the Docker engine of the GitHub-hosted runner.
-    - name: Setup Testcontainers Cloud Client
-      if: ${{ env.TC_CLOUD_TOKEN != '' }}
-      uses: atomicjar/testcontainers-cloud-setup-action@v1
-      with:
-        token: ${{ env.TC_CLOUD_TOKEN }}
-
+    # Testcontainers uses the Docker engine that is pre-installed on GitHub-hosted Ubuntu runners.
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
